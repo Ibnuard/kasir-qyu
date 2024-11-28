@@ -7,14 +7,75 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {Avatar, Card, Icon, Text} from 'react-native-paper';
+import {Avatar, Icon, Text} from 'react-native-paper';
 import {CustomCard, Gap} from '../../components';
-import {RootStackParamList} from '../../types';
 import {THEME_COLORS} from '../../constants';
-import {Scaler, scaleFont} from '../../utils';
+import {RootStackParamList} from '../../types';
+import {Scaler} from '../../utils';
 import {Assets} from '../../utils/LoadAssets';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+
+type TButtonIcon = {
+  text: string;
+  icon: string;
+  color: string;
+};
+
+const SAMPLE_MENU = [
+  {
+    icon: 'food',
+    color: THEME_COLORS.primary,
+    text: 'Katalog',
+  },
+  {
+    icon: 'shopping',
+    color: THEME_COLORS.primary,
+    text: 'Pengaturan Menu',
+  },
+  {
+    icon: 'wallet',
+    color: THEME_COLORS.primary,
+    text: 'Pembayaran',
+  },
+  {
+    icon: 'storefront',
+    color: THEME_COLORS.primary,
+    text: 'Toko',
+  },
+  {
+    icon: 'account-cash',
+    color: THEME_COLORS.primary,
+    text: 'Pelanggan',
+  },
+  {
+    icon: 'printer',
+    color: THEME_COLORS.primary,
+    text: 'Printer',
+  },
+  {
+    icon: 'chart-arc',
+    color: THEME_COLORS.primary,
+    text: 'Statistik',
+  },
+];
+
+function RenderButtonIcon(props: TButtonIcon) {
+  return (
+    <TouchableOpacity style={styles.buttonIconContainer} activeOpacity={0.8}>
+      <Avatar.Icon
+        icon={props.icon}
+        size={48}
+        color={props.color}
+        style={styles.shopIconBg}
+      />
+      <Gap h={8} />
+      <Text variant={'labelMedium'} style={styles.textMenu}>
+        {props.text}
+      </Text>
+    </TouchableOpacity>
+  );
+}
 
 const Home = ({route, navigation}: Props) => {
   return (
@@ -113,6 +174,13 @@ const Home = ({route, navigation}: Props) => {
             <Icon source={'restart'} size={24} color={THEME_COLORS.primary} />
           </TouchableOpacity>
         </View>
+
+        {/* Main Menu */}
+        <View style={styles.menuContainer}>
+          {SAMPLE_MENU.map((item, index) => (
+            <RenderButtonIcon {...item} key={index} />
+          ))}
+        </View>
       </View>
     </View>
   );
@@ -191,7 +259,8 @@ const styles = StyleSheet.create({
 
   incomeContainer: {
     justifyContent: 'space-between',
-    margin: Scaler(14),
+    marginHorizontal: Scaler(14),
+    marginVertical: Scaler(24),
   },
 
   incomeContent: {
@@ -202,6 +271,18 @@ const styles = StyleSheet.create({
     padding: Scaler(8),
   },
 
+  buttonIconContainer: {
+    alignItems: 'center',
+    width: '25%',
+  },
+
+  menuContainer: {
+    flexWrap: 'wrap',
+    rowGap: Scaler(32),
+    flexDirection: 'row',
+    marginVertical: Scaler(14),
+  },
+
   // -- text style
   textName: {
     fontWeight: '800',
@@ -209,6 +290,10 @@ const styles = StyleSheet.create({
 
   textIncome: {
     fontWeight: '800',
+  },
+
+  textMenu: {
+    textAlign: 'center',
   },
 });
 
