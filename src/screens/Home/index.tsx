@@ -121,7 +121,7 @@ const Home = ({route, navigation}: Props) => {
               <Text
                 style={[styles.textName, styles.baseTextPrimary]}
                 variant={'titleMedium'}>
-                Nama Toko yang panjang sekali jadi test deh
+                Toko Ajaib
               </Text>
               <Text style={styles.baseTextSecondary} variant={'bodyMedium'}>
                 Alamat
@@ -181,6 +181,15 @@ const Home = ({route, navigation}: Props) => {
             <RenderButtonIcon {...item} key={index} />
           ))}
         </View>
+
+        {/* Bottom Content */}
+        <View style={styles.bottomContainer}>
+          <Text
+            variant={'labelMedium'}
+            style={[styles.textVersion, styles.baseTextSecondary]}>
+            Versi 0.0.1
+          </Text>
+        </View>
       </View>
     </View>
   );
@@ -223,6 +232,7 @@ const styles = StyleSheet.create({
 
   baseTextSecondary: {
     color: THEME_COLORS.secondary,
+    opacity: 0.7,
   },
 
   // -- other style
@@ -283,6 +293,10 @@ const styles = StyleSheet.create({
     marginVertical: Scaler(14),
   },
 
+  bottomContainer: {
+    marginTop: Scaler(24),
+  },
+
   // -- text style
   textName: {
     fontWeight: '800',
@@ -293,6 +307,10 @@ const styles = StyleSheet.create({
   },
 
   textMenu: {
+    textAlign: 'center',
+  },
+
+  textVersion: {
     textAlign: 'center',
   },
 });
